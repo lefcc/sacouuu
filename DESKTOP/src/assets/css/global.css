@@ -1,0 +1,78 @@
+
+
+:root {
+  /* identidade visual do projeto */
+  --purple:         #5f4c9a;
+  --purple-dark:    #4a3a7a;
+  --purple-light:   #8b7bbf;
+  --green:          #6fb755;
+  --green-dark:     #5a9645;
+  --cream:          #f9e8c8;
+  --red:            #e05a6a;
+  --amber:          #f5a623;
+  --teal:           #4ecdc4;
+
+  /* layout claro */
+  --bg:             #f7f6fb;
+  --bg-card:        #ffffff;
+  --bg-sidebar:     #3d3068;
+  --text-primary:   #1e1740;
+  --text-secondary: #7c6fa0;
+  --border:         #ece8f5;
+  --shadow:         0 1px 4px rgba(95,76,154,0.08);
+  --shadow-md:      0 4px 16px rgba(95,76,154,0.10);
+  --input-bg:       #f4f2fa;
+  --row-hover:      #faf9fd;
+  --badge-active:   #edfae6;
+  --badge-inactive: #fdf0f2;
+}
+
+/*versão escuro*/
+
+[data-theme="dark"] {
+  --bg:             #13111e;
+  --bg-card:        #1e1a2e;
+  --bg-sidebar:     #0e0c19;
+  --purple:         #8b7bbf;
+  --purple-dark:    #a090d0;
+  --text-primary:   #ede8ff;
+  --text-secondary: #9080b8;
+  --border:         #2a2440;
+  --shadow:         0 1px 4px rgba(0,0,0,0.25);
+  --shadow-md:      0 4px 20px rgba(0,0,0,0.35);
+  --input-bg:       #261f3a;
+  --row-hover:      #221d33;
+  --badge-active:   #1a2e16;
+  --badge-inactive: #2e1620;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Baloo Tamma 2', sans-serif;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* A tela de login usa display:flex diferente — controlado via JS */
+body { display: flex; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(95,76,154,0.25); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(95,76,154,0.45); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: rgba(139,123,191,0.35); }
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: rgba(139,123,191,0.55); }
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.view { display: none; }
+.view.active { display: block; }

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdnjs.cloudflare.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: http://localhost:8000 http://127.0.0.1:8000;
+  ">
+  <title>Sacou — Painel Administrativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos globais e de cada seção -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/login.css">
+  <link rel="stylesheet" href="assets/css/sidebar.css">
+  <link rel="stylesheet" href="assets/css/header.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="stylesheet" href="assets/css/tabelas.css">
+  <link rel="stylesheet" href="assets/css/modal_popup.css">
+  <link rel="stylesheet" href="assets/css/conteudo.css">
+  <link rel="stylesheet" href="assets/css/financeiro.css">
+</head>
+<body class="login-active">
+
+  <!-- ══════════════════════════════════════════════
+       TELA DE LOGIN
+       Exibida antes do painel. Controlada pelo app.js.
+       ══════════════════════════════════════════════ -->
+  <div id="login-screen">
+
+    <!-- Painel esquerdo: logo + mascote -->
+    <div class="login-brand">
+      <span class="login-logo-svg" style="display:block;text-align:center;font-family:'Baloo Tamma 2',sans-serif;font-weight:700;font-size:44px;color:#fff">Sacou</span>
+      <!-- Mascote sem fundo (SVG transparente) substituindo o PNG anterior -->
+      <img class="login-mascot" src="assets/img/Piscando-removebg.png" alt="Mascote Sacou">
+      <div class="login-brand-tagline">Educação Financeira para Jovens</div>
+    </div>
+
+    <!-- Painel direito: formulário de login -->
+    <div class="login-form-panel">
+      <div class="login-card">
+        <div class="login-logo">
+          <span class="login-logo-img" style="text-align:center;font-family:'Baloo Tamma 2',sans-serif;font-weight:700;font-size:34px;color:#fff">Sacou</span>
+          <div class="login-tagline">Painel Administrativo</div>
+        </div>
+        <div class="login-title">Entrar</div>
+        <div class="login-group">
+          <label class="login-label" for="login-email">Usuário</label>
+          <input class="login-input" type="text" id="login-email"
+            placeholder="Digite o email cadastrado" autocomplete="off">
+        </div>
+        <div class="login-group">
+          <label class="login-label" for="login-senha">Senha</label>
+          <input class="login-input" type="password" id="login-senha"
+            placeholder="Digite a senha" autocomplete="off">
+        </div>
+        <button class="login-btn" id="btn-login">Entrar</button>
+        <div class="login-error" id="login-error"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SIDEBAR — menu lateral fixo
+       ══════════════════════════════════════════════ -->
+  <aside class="sidebar">
+
+    <div class="sidebar-logo">
+      <span class="sidebar-logo-img" style="text-align:center;font-family:'Baloo Tamma 2',sans-serif;font-weight:700;font-size:22px;color:#fff;display:block">Sacou</span>
+      <div class="sidebar-user-name" id="sidebar-user-name">Visitante</div>
+      <div class="sidebar-subtitle">Painel Administrativo</div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <div class="nav-section-label">Principal</div>
+
+      <div class="nav-item active" data-view="overview">
+        <span class="nav-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="12" width="4" height="9"/><rect x="10" y="6" width="4" height="15"/>
+            <rect x="17" y="3" width="4" height="18"/>
+          </svg>
+        </span>
+        <span>Visão Geral</span>
+      </div>
+
+      <div class="nav-section-label">Gestão</div>
+
+      <div class="nav-item" data-view="schools">
+        <span class="nav-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </span>
+        <span>Gestão de Escolas</span>
+        <span class="nav-badge" id="badge-schools">0</span>
+      </div>
+
+      <div class="nav-item" data-view="gestores">
+        <span class="nav-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <span>Gestores do Sistema</span>
+      </div>
+
+      <div class="nav-item" data-view="content">
+        <span class="nav-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+        </span>
+        <span>Gestão de Conteúdo</span>
+      </div>
+
+      <!-- Gestão Financeira removida do menu lateral: é uma ação vinculada à
+           escola, acessível pelo botão "Financeiro" na tabela. -->
+
+      <div class="nav-item" data-view="personalizacao">
+        <span class="nav-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </span>
+        <span>Personalização</span>
+      </div>
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="btn-exit" id="btn-exit">
+        <span class="exit-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </span>
+        Sair
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════════════════════
+       ÁREA PRINCIPAL — onde as seções são exibidas
+       ══════════════════════════════════════════════ -->
+  <div class="main">
+
+    <header class="header">
+      <div class="header-title" id="header-title">Visão Geral</div>
+      <div class="header-right">
+        <div class="header-user">
+          <div class="header-user-avatar">AD</div>
+          <div class="header-user-info">
+            <span class="header-user-name">Administrador</span>
+            <span class="header-user-role">Super Admin</span>
+          </div>
+        </div>
+        <button class="dark-toggle" id="btn-dark" title="Alternar modo escuro">
+          <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg id="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="content" id="content-area">
+
+      <!-- ── SEÇÃO: VISÃO GERAL ── -->
+      <section class="view active" id="view-overview">
+        <div class="section-title">Dashboard</div>
+        <div class="page-filters">
+          <label class="page-filter-label">Escola</label>
+          <select class="filter-select" id="filter-escola-overview">
+            <option value="">Todas as Escolas</option>
+          </select>
+        </div>
+        <div class="metrics-grid" id="metrics-grid"></div>
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-title">
+              Alunos Ativos por Escola
+              <span id="chart-period-label">Últimos 30 dias</span>
+            </div>
+            <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+            <div class="chart-legend" id="bar-legend"></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Desempenho Médio nos Quizzes</div>
+            <div class="donut-wrap">
+              <canvas id="donutChart" width="170" height="170"></canvas>
+              <div class="donut-center">
+                <div class="donut-pct" id="donut-pct">—</div>
+                <div class="donut-label">Acertos</div>
+              </div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:#6fb755"></div> Acertos</div>
+              <div class="legend-item"><div class="legend-dot" style="background:#e05a6a"></div> Erros</div>
+            </div>
+          </div>
+        </div>
+        <div class="ranking-card">
+          <div class="ranking-title">Ranking — Escolas com Mais Alunos</div>
+          <div id="ranking-list"></div>
+        </div>
+      </section>
+
+      <!-- ── SEÇÃO: GESTÃO DE ESCOLAS ── -->
+      <section class="view" id="view-schools">
+        <div class="section-title">Gestão de Escolas</div>
+        <div class="table-card">
+          <div class="table-header">
+            <div class="table-header-title">Escolas Cadastradas</div>
+            <input type="text" class="search-mini" id="search-schools" placeholder="Buscar escola...">
+            <button class="btn-add" id="btn-toggle-arquivadas" title="Mostrar/esconder escolas arquivadas">🗄️ Ver Arquivadas</button>
+            <button class="btn-add" id="btn-add-school">+ Cadastrar</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th></th><th>Nome</th><th>CNPJ</th><th>Código</th><th>Coord / Prof</th>
+                  <th>Alunos</th><th>Status</th><th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="schools-tbody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="schools-count">Carregando...</span>
+            <div class="pagination" id="pagination-schools"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SEÇÃO: GESTORES DO SISTEMA ── -->
+      <section class="view" id="view-gestores">
+        <div class="section-title">Gestores do Sistema</div>
+        <div class="table-card">
+          <div class="table-header">
+            <div class="table-header-title">Gestores Master Cadastrados</div>
+            <button class="btn-add" id="btn-add-gestor">+ Cadastrar Gestor</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Nome</th><th>E-mail</th><th>Perfil</th><th>Status</th><th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="gestores-tbody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="gestores-count">Carregando...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SEÇÃO: GESTÃO DE CONTEÚDO ── -->
+      <section class="view" id="view-content">
+        <div class="section-title">Gestão de Conteúdo</div>
+        <div class="content-grid">
+          <div class="content-card">
+            <div class="content-card-head">
+              <h3>Trilhas & Aulas</h3>
+              <button class="btn-add" id="btn-add-question">+ Nova Trilha</button>
+            </div>
+            <div class="content-card-body" id="questions-list" style="max-height:calc(100vh - 220px);overflow-y:auto"></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-head">
+              <h3>Detalhes da Aula</h3>
+            </div>
+            <div class="content-card-body" id="mascot-list" style="max-height:calc(100vh - 220px);overflow-y:auto">
+              <p style="color:var(--text-secondary);font-size:13px;padding:20px 0;text-align:center">
+                Selecione uma aula na lista ao lado para ver seus detalhes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SEÇÃO: GESTÃO FINANCEIRA (página unificada por escola) ── -->
+      <section class="view" id="view-financeiro">
+        <div class="fin-topbar">
+          <button class="btn-voltar" id="btn-voltar-escolas" title="Voltar para Gestão de Escolas">← Voltar</button>
+          <div class="fin-topbar-titulo" id="fin-titulo">Gestão Financeira</div>
+        </div>
+
+        <!-- Seção 1: Contrato -->
+        <div class="fin-bloco">
+          <div class="fin-bloco-header">
+            <h3 class="fin-bloco-titulo">📄 Contrato</h3>
+          </div>
+          <div id="fin-contrato-card" class="fin-contrato-card">
+            <p class="fin-vazio">Selecione uma escola para visualizar o contrato.</p>
+          </div>
+        </div>
+
+        <!-- Seção 2: Gerar Fatura do Mês -->
+        <div class="fin-bloco">
+          <div class="fin-bloco-header">
+            <h3 class="fin-bloco-titulo">⚡ Gerar Fatura do Mês</h3>
+          </div>
+          <div class="fin-gerar-row">
+            <input class="form-input" type="month" id="fin-mes" style="max-width:220px">
+            <button class="btn-add" id="btn-gerar-fatura" style="white-space:nowrap">⚡ Gerar Fatura do Mês</button>
+          </div>
+          <div id="fin-preview" class="fin-preview"></div>
+        </div>
+
+        <!-- Seção 3: Histórico de Faturas -->
+        <div class="fin-bloco">
+          <div class="fin-bloco-header">
+            <h3 class="fin-bloco-titulo">💰 Histórico de Faturas</h3>
+          </div>
+          <div class="fin-tabela-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Mês</th><th>Valor</th><th>Vencimento</th><th>Status</th><th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="faturas-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Seção 4: Documentos do Contrato -->
+        <div class="fin-bloco">
+          <div class="fin-bloco-header">
+            <h3 class="fin-bloco-titulo">📎 Documentos do Contrato</h3>
+          </div>
+          <div class="fin-doc-acoes">
+            <button class="btn-add" id="btn-anexar-contrato">📎 Anexar Arquivo</button>
+            <span class="fin-doc-dica">PDF ou imagem (PNG/JPG) do contrato físico — histórico auditável.</span>
+          </div>
+          <div id="fin-docs-lista" class="fin-docs-lista">
+            <p class="fin-vazio">Nenhum documento anexado.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SEÇÃO: PERSONALIZAÇÃO ── -->
+      <section class="view" id="view-personalizacao">
+        <div class="section-title">Personalização</div>
+        <div class="content-grid">
+          <div class="content-card">
+            <div class="content-card-head">
+              <h3>Avatares</h3>
+              <button class="btn-add" id="btn-add-avatar">+ Novo Avatar</button>
+            </div>
+            <div class="content-card-body" id="avatars-list"></div>
+          </div>
+          <div class="content-card">
+            <div class="content-card-head">
+              <h3>Itens da Loja</h3>
+              <button class="btn-add" id="btn-add-store-item">+ Novo Item</button>
+            </div>
+            <div class="content-card-body" id="store-items-list"></div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /content-area -->
+  </div><!-- /main -->
+
+  <!-- ══════════════════════════════════════════════
+       MODAL (pop-up reutilizável)
+       ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal-box">
+      <div class="modal-header">
+        <span class="modal-title-text" id="modal-title-text">Modal</span>
+        <button class="modal-close" id="modal-close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn-modal-cancel" id="modal-cancel">Cancelar</button>
+        <button class="btn-modal-save"   id="modal-save">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificação toast (mensagem rápida de canto de tela) -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ══════════════════════════════════════════════
+       SCRIPTS — a ordem importa!
+       Os componentes devem ser carregados ANTES das views,
+       e as views ANTES do app.js
+       ══════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <!-- Componentes reutilizáveis -->
+  <script src="utils.js"></script>
+  <script src="componentes/notificacao.js"></script>
+  <script src="componentes/modal.js"></script>
+  <script src="componentes/graficos.js"></script>
+
+  <!-- Views (telas) -->
+  <script src="views/visao-geral.js"></script>
+  <script src="views/escolas.js"></script>
+  <script src="views/gestores.js"></script>
+  <script src="views/conteudo.js"></script>
+  <script src="views/financeiro.js"></script>
+  <script src="views/personalizacao.js"></script>
+
+  <!-- Controlador principal (carregado por último) -->
+  <script src="app.js"></script>
+
+</body>
+</html>

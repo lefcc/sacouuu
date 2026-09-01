@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+  <title>Sobre — Sacou</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Baloo Tamma 2', sans-serif;
+      background: linear-gradient(145deg, #3d3068 0%, #5f4c9a 100%);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      user-select: none;
+      -webkit-app-region: drag; /* permite arrastar a janela pela área */
+    }
+
+    .mascot {
+      width: 100px;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+      animation: float 3s ease-in-out infinite;
+      -webkit-app-region: no-drag;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    .logo-svg {
+      width: 180px;
+      margin-bottom: 20px;
+      -webkit-app-region: no-drag;
+    }
+
+    .version {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .divider {
+      width: 280px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin-bottom: 20px;
+    }
+
+    .info {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      line-height: 1.8;
+    }
+    .info strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    .btn-fechar {
+      margin-top: 28px;
+      padding: 9px 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-family: 'Baloo Tamma 2', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      -webkit-app-region: no-drag;
+    }
+    .btn-fechar:hover { background: rgba(255,255,255,0.16); }
+  </style>
+</head>
+<body>
+
+  <img class="mascot"   src="assets/img/mascote.png" alt="Mascote">
+  <span class="logo-svg" style="display:block;margin:0 auto 20px;text-align:center;font-family:'Baloo Tamma 2',sans-serif;font-weight:700;font-size:40px;color:#fff">Sacou</span>
+
+  <div class="version">Versão 1.0.0 — Painel Administrativo</div>
+
+  <div class="divider"></div>
+
+  <div class="info">
+    <strong>Descrição</strong><br>
+    Sistema desktop de gestão para o app<br>Sacou Educação Financeira.<br><br>
+    <strong>Desenvolvido por</strong><br>
+    Maria Eduarda · Leticia · João<br><br>
+    <strong>Tecnologias</strong><br>
+    Electron · Node.js · Chart.js<br><br>
+    <strong>Licença</strong><br>
+    MIT — Projeto Integrador II
+  </div>
+
+  <button class="btn-fechar" id="btn-fechar">Fechar</button>
+
+  <script>
+    document.getElementById('btn-fechar').addEventListener('click', () => {
+      window.electronAPI.closeWindow();
+    });
+  </script>
+</body>
+</html>

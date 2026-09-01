@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Ears -->
+  <ellipse cx="36" cy="20" rx="8" ry="18" fill="#8B7BBF"/>
+  <ellipse cx="64" cy="20" rx="8" ry="18" fill="#8B7BBF"/>
+  <ellipse cx="36" cy="22" rx="4" ry="12" fill="#EDE8FF"/>
+  <ellipse cx="64" cy="22" rx="4" ry="12" fill="#EDE8FF"/>
+  <!-- Cap dome -->
+  <path d="M25 60 C25 40 35 30 50 30 C65 30 75 40 75 60 Z" fill="#5F4C9A"/>
+  <!-- Brim -->
+  <path d="M22 60 L78 60 L88 67 Q90 71 85 71 L15 71 Q10 71 12 67 Z" fill="#8B7BBF"/>
+</svg>

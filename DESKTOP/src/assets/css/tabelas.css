@@ -1,0 +1,215 @@
+/* ─── tabelas.css ─────────────────────────────────────────────────────────── */
+
+.table-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.table-header {
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.table-header-title { font-size: 13px; font-weight: 700; color: var(--text-primary); flex: 1; }
+
+.search-mini {
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-family: 'Baloo Tamma 2', sans-serif;
+  font-size: 12.5px;
+  outline: none;
+  width: 190px;
+}
+.search-mini:focus { border-color: var(--purple); }
+
+.btn-add {
+  padding: 6px 14px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-family: 'Baloo Tamma 2', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+.btn-add:hover { background: var(--green-dark); }
+
+.data-table { width: 100%; border-collapse: collapse; }
+
+.data-table th {
+  padding: 9px 16px;
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 11px 16px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover td { background: var(--row-hover); }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.badge.active   { background: var(--badge-active);   color: #3d7a28; }
+.badge.inactive { background: var(--badge-inactive); color: #c04050; }
+[data-theme="dark"] .badge.active   { color: #7ade52; }
+[data-theme="dark"] .badge.inactive { color: #ff8090; }
+
+/* Célula "Coord / Prof" da tabela de escolas */
+.coord-prof-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+.coord-prof-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.coord-prof-rotulo {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.action-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: none;
+  font-family: 'Baloo Tamma 2', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.12s;
+  white-space: nowrap;
+}
+.action-btn:hover        { border-color: var(--purple); color: var(--purple); }
+.action-btn.danger:hover { border-color: var(--red);    color: var(--red);    }
+
+.actions-cell { display: flex; gap: 5px; }
+
+/* Wrapper de tabela: quando a tabela é mais larga que a tela, mostra a barra
+   de rolagem HORIZONTAL apenas na tabela (não em toda a página). */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-footer {
+  padding: 9px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.table-footer > span { font-size: 11.5px; color: var(--text-secondary); }
+
+.pagination { display: flex; gap: 3px; }
+.page-btn {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  font-family: 'Baloo Tamma 2', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.12s;
+}
+.page-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+.page-btn:hover:not(.active) { border-color: var(--purple); color: var(--purple); }
+/* ── Expansão de linha (coordenadores) ─────────────────────────────────────── */
+.btn-expand {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, transform 0.12s;
+}
+.btn-expand:hover { background: var(--purple); color: #fff; }
+.btn-expand.open { background: var(--purple); color: #fff; }
+
+.escola-expanded-row td {
+  background: rgba(95,76,154,0.06);
+  border-bottom: 1px solid var(--border);
+}
+.coord-wrap { padding: 6px 10px 12px; }
+.coord-head {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.coord-title {
+  font-family: 'Baloo Tamma 2', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--purple);
+}
+/* Seções de coordenadores e professores na linha expandida */
+.membros-secao + .membros-secao { margin-top: 18px; }
+.coord-table { width: 100%; border-collapse: collapse; }
+.coord-table th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.coord-table td {
+  padding: 7px 10px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(128,128,128,0.12);
+}
+.coord-table tr:last-child td { border-bottom: none; }

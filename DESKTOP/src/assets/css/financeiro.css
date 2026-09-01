@@ -1,0 +1,337 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   financeiro.css — Estilos da seção de Gestão Financeira
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Topbar da página unificada (Voltar + Título) ─────────────────────────── */
+
+.fin-topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.fin-topbar-titulo {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-voltar {
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-family: 'Baloo Tamma 2', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.12s;
+  flex-shrink: 0;
+}
+.btn-voltar:hover { border-color: var(--purple); color: var(--purple); }
+
+/* ── Blocos (Contrato, Gerar Fatura, Histórico) ───────────────────────────── */
+
+.fin-bloco {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.fin-bloco-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.fin-bloco-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* ── Card de Contrato (Seção 1) ───────────────────────────────────────────── */
+
+.fin-contrato-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fin-contrato-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.fin-contrato-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 16px;
+  background: var(--hover-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  min-width: 140px;
+}
+
+.fin-contrato-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+}
+
+.fin-contrato-valor {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Estado vazio (sem contrato / sem escola selecionada) */
+.fin-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 22px 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* ── Gerar Fatura do Mês (Seção 2) ────────────────────────────────────────── */
+
+.fin-gerar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.fin-preview {
+  margin-top: 12px;
+}
+
+.fin-preview-texto {
+  display: inline-block;
+  padding: 10px 14px;
+  background: rgba(95,76,154,0.08);
+  border: 1px dashed var(--card-border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.fin-preview-carregando {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.fin-preview-erro {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #b52e42;
+}
+
+/* ── Histórico de Faturas (Seção 3) ───────────────────────────────────────── */
+
+.fin-tabela-wrap {
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+
+/* ── Lista de Contratos (legado) ──────────────────────────────────────────── */
+
+.contratos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contrato-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--hover-bg);
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  transition: background 0.15s;
+}
+
+.contrato-item:hover { background: var(--card-border); }
+
+.contrato-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.contrato-info {
+  flex: 1;
+  min-width: 0; /* garante que o texto quebre e não estique o card */
+}
+
+.contrato-nome {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contrato-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 3px;
+}
+
+.contrato-escola,
+.contrato-data {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.contrato-acoes {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Estado vazio (quando não há contratos) */
+.financeiro-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 28px 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* ── Badges de status de fatura ───────────────────────────────────────────── */
+
+.badge-fatura {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.badge-fatura.pendente {
+  background: rgba(245,166,35,0.15);
+  color: #c47f00;
+}
+
+.badge-fatura.pago {
+  background: rgba(111,183,85,0.15);
+  color: #3d7a18;
+}
+
+.badge-fatura.vencido {
+  background: rgba(224,90,106,0.15);
+  color: #b52e42;
+}
+
+/* ── Área de upload de PDF ────────────────────────────────────────────────── */
+
+.upload-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px;
+  border: 2px dashed var(--card-border);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 13px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-area:hover {
+  border-color: var(--color-primary);
+  background: rgba(95,76,154,0.04);
+}
+
+/* ── Documentos do Contrato (Seção 4) ──────────────────────────────────────── */
+
+.fin-doc-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.fin-doc-dica {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.fin-docs-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fin-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.fin-doc-icone {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.fin-doc-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fin-doc-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fin-doc-data {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.fin-doc-item-acoes {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}

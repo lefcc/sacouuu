@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Cap dome -->
+  <path d="M25 55 C25 35 35 25 50 25 C65 25 75 35 75 55 Z" fill="#5F4C9A"/>
+  <!-- Brim -->
+  <path d="M22 55 L78 55 L88 62 Q90 66 85 66 L15 66 Q10 66 12 62 Z" fill="#8B7BBF"/>
+  <!-- Wings -->
+  <path d="M24 42 C14 36 8 38 4 44 C10 46 16 48 22 50 Z" fill="#F7F6FB"/>
+  <path d="M76 42 C86 36 92 38 96 44 C90 46 84 48 78 50 Z" fill="#F7F6FB"/>
+</svg>

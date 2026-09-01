@@ -1,0 +1,59 @@
+# ---- Geral ----
+*.log
+*.db
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+chrome_err.log
+node_modules/
+
+# Editores
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/extensions.json
+
+# ---- BACKEND (Python/FastAPI) ----
+# Ambientes virtuais
+venv/
+.venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Segredos e configurações locais
+.env
+!.env.example
+
+# Arquivos de upload e dados de teste
+BACKEND/uploads/
+BACKEND/test_smoke.db
+
+# ---- DESKTOP (Electron) ----
+DESKTOP/node_modules/
+DESKTOP/dist/
+
+# ---- WEB (Vite) ----
+WEB/node_modules/
+WEB/dist/
+WEB/dist-ssr/
+WEB/*.local
+
+# ---- MOBILE (Flutter) ----
+MOBILE/mobile_sacou/build/
+MOBILE/mobile_sacou/.dart_tool/
+MOBILE/mobile_sacou/.flutter-plugins-dependencies
+MOBILE/mobile_sacou/.pub-cache/
+MOBILE/mobile_sacou/coverage/

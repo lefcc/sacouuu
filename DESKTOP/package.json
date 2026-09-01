@@ -1,0 +1,43 @@
+{
+  "name": "sacou-admin",
+  "version": "1.0.0",
+  "description": "Painel Administrativo - Sacou Educação Financeira",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.sacou.admin",
+    "productName": "Sacou Admin",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "keywords": [
+    "electron",
+    "sacou",
+    "educacao-financeira",
+    "admin"
+  ],
+  "author": "Maria Eduarda & Jheniffer Alice",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^43.4.0",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.1"
+  },
+  "type": "commonjs"
+}

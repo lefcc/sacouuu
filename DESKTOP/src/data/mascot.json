@@ -1,0 +1,6 @@
+[
+  { "id": 1, "context": "Boas-vindas", "expression": "Feliz",   "message": "Oi! Eu sou o Porquinho Sábio! Vamos aprender sobre finanças juntos?" },
+  { "id": 2, "context": "Acerto",      "expression": "Animado", "message": "Incrível! Você acertou! Continue assim!"                              },
+  { "id": 3, "context": "Erro",        "expression": "Triste",  "message": "Não desanima! Tente de novo, você consegue!"                          },
+  { "id": 4, "context": "Novo nível",  "expression": "Animado", "message": "Parabéns! Você subiu de nível!"                                        }
+]
