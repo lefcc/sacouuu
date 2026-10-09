@@ -4,20 +4,22 @@ from decimal import Decimal
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr
-from sqlalchemy import func, select
+from sqlalchemy import case, func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from .. import models
 from ..database import get_db
 from ..deps import (
-    require_role,
     garantir_acesso_escola,
+    get_current_user,
+    require_role,
     PERFIS_PLATAFORMA,
 )
 from ..schemas import (
     CoordenadorOut,
     DashboardOut,
+    DesempenhoAlunoOut,
     EscolaCreate,
     EscolaOut,
     EscolaUpdate,
@@ -81,6 +83,48 @@ def _gerar_codigo_escola(db: Session) -> str:
     except ValueError:
         numero = 1
     return f"ESC{numero:04d}"
+
+
+def desempenho_alunos_por_escola(db: Session, escola_id: int) -> list[DesempenhoAlunoOut]:
+    """Agrega o desempenho de cada aluno ativo da escola em uma única query."""
+    rows = db.execute(
+        select(
+            models.Usuario.id_usuario,
+            models.Usuario.nome_completo,
+            models.Usuario.email,
+            func.max(models.Turma.nome_turma).label("nome_turma"),
+            func.count(
+                case((models.ProgressoLicao.status_aprovacao.is_(True), 1))
+            ).label("total_licoes_concluidas"),
+            func.avg(models.ProgressoLicao.qtd_acertos).label("nota_media"),
+            func.max(models.ProgressoLicao.data_conclusao).label("data_ultima_atividade"),
+        )
+        .outerjoin(models.Turma, models.Usuario.id_turma == models.Turma.id_turma)
+        .outerjoin(
+            models.ProgressoLicao,
+            models.ProgressoLicao.id_aluno == models.Usuario.id_usuario,
+        )
+        .where(
+            models.Usuario.escola_id == escola_id,
+            models.Usuario.perfil == "ALUNO",
+            models.Usuario.status_ativo == True,
+        )
+        .group_by(models.Usuario.id_usuario)
+        .order_by(models.Usuario.nome_completo)
+    ).all()
+
+    return [
+        DesempenhoAlunoOut(
+            id_usuario=r.id_usuario,
+            nome_completo=r.nome_completo,
+            email=r.email,
+            nome_turma=r.nome_turma,
+            total_licoes_concluidas=int(r.total_licoes_concluidas or 0),
+            nota_media=float(r.nota_media) if r.nota_media is not None else None,
+            data_ultima_atividade=r.data_ultima_atividade,
+        )
+        for r in rows
+    ]
 
 
 @router.get("", response_model=list[EscolaOut])
@@ -610,6 +654,16 @@ def dashboard_escola(
         trilhas=trilhas,
         financeiro=financeiro,
     )
+
+
+@router.get("/{escola_id}/desempenho-alunos", response_model=list[DesempenhoAlunoOut])
+def desempenho_alunos(
+    escola_id: int,
+    db: Session = Depends(get_db),
+    usuario: models.Usuario = Depends(get_current_user),
+):
+    garantir_acesso_escola(usuario, escola_id)
+    return desempenho_alunos_por_escola(db, escola_id)
 
 
 @router.get("/{escola_id}/usuarios", response_model=list[UsuarioEscolaOut])

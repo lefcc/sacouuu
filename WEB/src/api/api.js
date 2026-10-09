@@ -89,6 +89,7 @@ export const api = {
     criar: (dados) => http.post('/escolas', dados),
     atualizar: (id, dados) => http.put(`/escolas/${id}`, dados),
     dashboard: (id, params) => http.get(`/escolas/${id}/dashboard`, { params }),
+    getDesempenhoAlunos: (id) => http.get(`/escolas/${id}/desempenho-alunos`),
     turmas: {
       listar: (id) => http.get(`/escolas/${id}/turmas`),
       criar: (id, dados) => http.post(`/escolas/${id}/turmas`, dados),

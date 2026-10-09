@@ -1,3 +1,4 @@
+from datetime import datetime
 from decimal import Decimal
 from typing import Optional
 
@@ -235,6 +236,16 @@ class DashboardOut(BaseModel):
     desempenho_erros: int = 0
     trilhas: list[TrilhaProgressoOut] = []
     financeiro: Optional[FinanceiroResumoOut] = None
+
+
+class DesempenhoAlunoOut(BaseModel):
+    id_usuario: int
+    nome_completo: str
+    email: str
+    nome_turma: Optional[str] = None
+    total_licoes_concluidas: int
+    nota_media: Optional[float] = None
+    data_ultima_atividade: Optional[datetime] = None
 
 
 class TurmaCreate(BaseModel):

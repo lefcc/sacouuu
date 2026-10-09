@@ -257,7 +257,7 @@ const TurmasPage = () => {
     try {
       const { data } = await api.escola.usuarios.listar(escolaId);
       const alunosDisponiveis = data.filter(
-        (u) => u.perfil === 'ALUNO' && !u.arquivado && u.id_turma !== turma.id_turma,
+        (u) => u.perfil === 'ALUNO' && !u.arquivado && u.status_ativo && u.id_turma !== turma.id_turma,
       );
       setDisponiveis(alunosDisponiveis);
     } catch {
@@ -355,12 +355,14 @@ const TurmasPage = () => {
 
   const renderAluno = (aluno) => {
     const arquivado = !!aluno.arquivado;
+    const desativado = !aluno.status_ativo;
+    const inativo = arquivado || desativado;
     const editando = editandoId === aluno.id_usuario;
     return (
       <div
         key={aluno.id_usuario}
         className={`flex items-center justify-between gap-3 px-4 py-2 rounded-lg ${
-          arquivado ? 'opacity-50 text-gray-500' : ''
+          inativo ? 'opacity-50 text-gray-500' : ''
         }`}
       >
         <div className="min-w-0">
@@ -374,6 +376,11 @@ const TurmasPage = () => {
           {arquivado && (
             <span className="text-xs font-semibold bg-brand-amber/20 text-brand-amber px-2 py-0.5 rounded-full">
               Arquivado
+            </span>
+          )}
+          {desativado && !arquivado && (
+            <span className="text-xs font-semibold bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+              Inativo
             </span>
           )}
 
@@ -412,14 +419,16 @@ const TurmasPage = () => {
                 >
                   Editar
                 </button>
-                <button
-                  onClick={() => handleArquivarAluno(aluno)}
-                  className={`text-sm font-semibold hover:underline ${
-                    arquivado ? 'text-brand-green' : 'text-brand-amber'
-                  }`}
-                >
-                  {arquivado ? 'Desarquivar' : 'Arquivar'}
-                </button>
+                {!desativado && (
+                  <button
+                    onClick={() => handleArquivarAluno(aluno)}
+                    className={`text-sm font-semibold hover:underline ${
+                      arquivado ? 'text-brand-green' : 'text-brand-amber'
+                    }`}
+                  >
+                    {arquivado ? 'Desarquivar' : 'Arquivar'}
+                  </button>
+                )}
               </>
             )
           )}

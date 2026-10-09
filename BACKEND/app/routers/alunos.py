@@ -111,6 +111,7 @@ def arquivar_aluno(
 
     if dados.arquivado is not None:
         aluno.arquivado = dados.arquivado
+        aluno.status_ativo = not dados.arquivado
     if dados.nome_completo is not None:
         aluno.nome_completo = dados.nome_completo
     db.commit()

@@ -18,6 +18,7 @@ const Sidebar = ({ isCollapsed, isMobileOpen, onToggle, onCloseMobile, onLogout 
   // RBAC de navegação: Professor (VISUALIZADOR_ESCOLA) não vê Financeiro.
   // (A página "Gerenciar Escola" foi removida do Web — é exclusiva do Desktop.)
   const ehProfessor = usuario?.perfil === 'VISUALIZADOR_ESCOLA' || usuario?.tipo_perfil === 'PROFESSOR';
+  const podeVerDesempenho = usuario?.perfil === 'ADMIN_ESCOLA' || usuario?.perfil === 'VISUALIZADOR_ESCOLA';
 
   const menuItems = [
     {
@@ -36,11 +37,20 @@ const Sidebar = ({ isCollapsed, isMobileOpen, onToggle, onCloseMobile, onLogout 
       icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
     },
     {
+      label: 'Desempenho',
+      route: '/desempenho',
+      icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    },
+    {
       label: 'Financeiro',
       route: '/financeiro',
       icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17  5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
     },
-  ].filter((item) => !(ehProfessor && item.route === '/financeiro'));
+  ].filter((item) => {
+    if (item.route === '/financeiro' && ehProfessor) return false;
+    if (item.route === '/desempenho' && !podeVerDesempenho) return false;
+    return true;
+  });
 
   const irPara = (route) => {
     navigate(route);

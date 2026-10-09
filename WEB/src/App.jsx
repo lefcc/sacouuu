@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import RecuperarSenhaPage from './pages/RecuperarSenhaPage';
 import RedefinirSenhaPage from './pages/RedefinirSenhaPage';
 import DashboardPage from './pages/DashboardPage';
+import DesempenhoAlunos from './pages/DesempenhoAlunos';
 import TurmasPage from './pages/TurmasPage';
 import UsuariosPage from './pages/UsuariosPage';
 import FinanceiroPage from './pages/FinanceiroPage';
@@ -93,6 +94,7 @@ function AppRoutes() {
 
       {/* Painel (protegido) */}
       <Route path="/dashboard" element={<Protected autenticado={autenticado} onLogout={handleLogout}><DashboardPage /></Protected>} />
+      <Route path="/desempenho" element={<Protected autenticado={autenticado} onLogout={handleLogout}><DesempenhoAlunos /></Protected>} />
       <Route path="/turmas" element={<Protected autenticado={autenticado} onLogout={handleLogout}><TurmasPage /></Protected>} />
       <Route path="/usuarios" element={<Protected autenticado={autenticado} onLogout={handleLogout}><UsuariosPage /></Protected>} />
       <Route path="/financeiro" element={<Protected autenticado={autenticado} onLogout={handleLogout}><FinanceiroPage /></Protected>} />
